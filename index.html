@@ -1,26 +1,105 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Simple Web Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppVersal Reimagined</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'av-dark-slate': '#1A1D29',
+              'av-indigo': '#3B1D82',
+              'av-purple': '#5B3BC4',
+              'av-violet-blue': '#6A5AE0',
+              'av-cyan': '#A7D8F7',
+              'av-sky-blue': '#3BAAFF',
+              'av-lavender': '#D5CFFF',
+              'av-light-gray': '#F5F7FA',
+              'av-medium-gray': '#A0AEC0',
+              'av-text-dark': '#111827',
+              'av-text-dark-secondary': '#4B5563',
+              'av-text-light': '#E5E7EB',
+              'av-success': '#22C55E',
+              'av-warning': '#FACC15',
+              'av-error': '#EF4444',
+            },
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+            },
+            animation: {
+                'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                'count-up': 'countUp 1.5s ease-out forwards',
+            },
+            keyframes: {
+                fadeInUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+            },
+          },
+        },
+      }
+    </script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            color: #007acc;
-        }
-        p {
-            font-size: 1.2em;
-        }
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + 5px);
+        left: 50%;
+        transform: translateX(-50%) translateY(5px);
+        background-color: #1A1D29;
+        color: #E5E7EB;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-family: 'Inter', sans-serif;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s, transform 0.2s;
+        z-index: 100;
+        pointer-events: none;
+      }
+      [data-tooltip]:hover::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+      // Prevent FOUC (flash of unstyled content) for dark mode
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
 </head>
-<body>
-    <h1>Welcome to My Simple Web Page</h1>
-    <p>This is a basic HTML page. You can add more content here as needed.</p>
-</body>
+  <body class="bg-white dark:bg-av-dark-slate text-av-text-dark dark:text-av-text-light font-sans antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>
